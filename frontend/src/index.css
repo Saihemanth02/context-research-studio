@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #050510;
+    color: #cbd5e1;
+    font-family: 'Outfit', sans-serif;
+  }
+}
+
+/* Glassmorphism Styles */
+.glass-panel {
+  background: rgba(9, 9, 31, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Animations */
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(0, 245, 212, 0.2), 0 0 20px rgba(123, 97, 255, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 25px rgba(0, 245, 212, 0.4), 0 0 40px rgba(123, 97, 255, 0.2);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s infinite alternate;
+}
+
+/* Custom Hide Scrollbar Utilities */
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Rotating card scanner effect */
+.scanner-line {
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 245, 212, 0.4) 50%, transparent 100%);
+  animation: scan 4s linear infinite;
+}
+
+@keyframes scan {
+  0% { top: -100%; }
+  100% { top: 100%; }
+}
+
+/* Floating particle background styles */
+.particle {
+  position: fixed;
+  width: 3px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -10;
+  animation: float linear infinite;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(105vh);
+  }
+  to {
+    transform: translateY(-5vh);
+  }
+}
+
