@@ -6,10 +6,32 @@ Context Research Studio is an AI-powered full-stack research dashboard app. It c
 
 ## Technical Architecture & Flow
 
+```mermaid
+graph TD
+    User([User Query]) -->|Inquiry Input| React[React + Vite Frontend]
+    React -->|POST /api/research| Express[Express Backend]
+    
+    subgraph Multi-Agent Crawler Swarm
+        Express -->|Run Pipeline| Agent[Research Agent Orchestrator]
+        Agent -->|1. Parse Search Intents| Q1[Query Generator]
+        Agent -->|2. Query Search API| S2[Context.dev Web Search API]
+        S2 -->|3. Scrape Markdown| SC3[Context.dev Markdown Extractor]
+        SC3 -->|4. Extract Metrics| FE4[Statistics & Dates Regex Parser]
+        FE4 -->|5. Verify Authority| VR5[Source Credibility Ranker]
+        VR5 -->|6. Compile Assets| IM6[Logo & Screenshot Collector]
+        IM6 -->|7. Summarize Answers| RG7[LLM / Heuristic Synthesizer]
+    end
+    
+    React -.->|Serve Frontend| Netlify[Netlify Hosting]
+    Express -.->|Serve API| Render[Render Cloud Hosting]
+    S2 -->|Query Cloud| Context[Context.dev Cloud Services]
+```
+
 1. **Vite + React Frontend**: High-fidelity dark glassmorphic dashboard styled with Tailwind CSS, animating progress stages with Framer Motion, and graphing statistics with Recharts.
 2. **Express.js Backend Router**: Accepts query inputs, parses search intent, crawls links, scrapes markdown content via `contextClient.js`, and synthesizes final JSON reports.
 3. **Context.dev Integration**: Primary data scraper and screenshot gatherer module config.
 4. **Demo Mode fallback**: Allows developer testing out-of-the-box even without active keys.
+
 
 ---
 
